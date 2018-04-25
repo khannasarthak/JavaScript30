@@ -59,8 +59,39 @@
 
 <script>
 
+
+  window.addEventListener('keydown', function(e){
+    
+    // We use `` as ES6
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"`);
+
+    if(!audio) return;
+
+    const key = document.querySelector(`.key[data-key="${e.keyCode}"`);
+
+    audio.currentTime = 0;
+    audio.play(); 
+    console.log(key)
+    // to add a CSS class
+    key.classList.add('playing')
+
+  });
+  
+
+  function removeTransition(e){
+    
+    if (e.propertyName !== 'transform') return;
+    // console.log(e.propertyName)
+    this.classList.remove('playing');
+
+  }
+
+  const keys = document.querySelectorAll('.key')
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+
 </script>
 
 
 </body>
 </html>
+ 
